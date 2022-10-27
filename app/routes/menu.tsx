@@ -39,8 +39,8 @@ export default function MyMenu() {
 
           className="p-1 font-normal text-black lg:text-white"
         >
-          <NavLink to="/" className="flex items-center" end>
-            HOME
+          <NavLink to="/" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")} end>
+            Home
           </NavLink>
         </Typography>
         <Typography
@@ -48,8 +48,8 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="#" className="flex items-center">
-          IDENTITÀ
+        <NavLink to="/identita" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+          Identità
         </NavLink>
       </Typography>
       <Typography
@@ -57,8 +57,8 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="#" className="flex items-center">
-          SERVIZI
+        <NavLink to="/servizi" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+          Servizi
         </NavLink>
       </Typography>
       <Typography
@@ -66,8 +66,8 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="#" className="flex items-center">
-          RISORSE
+        <NavLink to="/risorse" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+          Risorse
         </NavLink>
       </Typography>
       <Typography
@@ -75,8 +75,8 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="#" className="flex items-center">
-            DONAZIONI
+        <NavLink to="/donazioni" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+            Donazioni 
         </NavLink>
       </Typography>
       <Typography
@@ -84,8 +84,8 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="#" className="flex items-center">
-            CONTATTI
+        <NavLink to="/contatti" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+            Contatti
         </NavLink>
       </Typography>
       <Typography
@@ -93,8 +93,8 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="#" className="flex items-center">
-            DISCLAIMER
+        <NavLink to="/disclaimer" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+            Disclaimer
         </NavLink>
       </Typography>
     </ul>

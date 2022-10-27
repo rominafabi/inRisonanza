@@ -14,14 +14,13 @@ export default function Index() {
           <MyMenu />
           <div className="w-full h-full flex flex-col items-center justify-center">
             <Typography variant="h1" className="font-serif lg:text-7xl" color="white">
-            ⚛ Romina Fabi ⚛︎
+            Romina Fabi
             </Typography>
             <Typography color="white" variant="paragraph" className="h-10">
             <Typewriter
               options={{
-                cursor : "⚛︎",
                 delay : 40,
-                strings: ['⚛︎ Consulente ', '⚛︎ Operatrice Bioenergetica ','⚛︎ Ricercatrice Spirituale '],
+                strings: ['Consulente', 'Operatrice Bioenergetica','Ricercatrice Spirituale'],
                 autoStart: true,
                 loop: true,
               }}

@@ -1,5 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import MyMenu from "./menu";
+import Typewriter from "typewriter-effect"
 
 export default function Risorse() {
    return (
@@ -10,6 +11,16 @@ export default function Risorse() {
                <div className="w-full h-full flex flex-col items-center justify-center">
                   <Typography variant="h1" color="white" className="font-serif lg:text-7xl">
                      Risorse Gratuite
+                  </Typography>
+                  <Typography color="white" variant="paragraph" className="h-10 text-center">
+                     <Typewriter
+                     options={{
+                        delay : 40,
+                        strings: ['Qui puoi trovare fonti, idee e risorse gratuite','Scorri verso il basso per scoprire di più!'],
+                        autoStart: true,
+                        loop: true,
+                     }}
+                     />
                   </Typography>
                </div>
             </div>
