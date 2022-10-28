@@ -103,6 +103,7 @@ export default function MyMenu() {
    return (
       <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:pt-4 lg:bg-transparent lg:border-none" blurred={false} shadow={false}>
          <NavLink
+          prefetch="intent"
           to="/"
           className="hidden lg:block cursor-pointer py-1.5 font-normal"
          >
@@ -116,7 +117,7 @@ export default function MyMenu() {
                   variant="h6"
                   className="p-1 font-normal text-black lg:text-white"
                   >
-                     <NavLink to="/" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+                     <NavLink prefetch="intent" to="/" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
                         Home
                      </NavLink>
                </Typography>
@@ -125,7 +126,7 @@ export default function MyMenu() {
                   variant="h6"
                   className="p-1 font-normal text-black lg:text-white"
                   >
-                     <NavLink to="/identita" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+                     <NavLink prefetch="intent" to="/identita" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
                         Identità
                      </NavLink>
                </Typography>
@@ -134,7 +135,7 @@ export default function MyMenu() {
                   variant="h6"
                   className="p-1 font-normal text-black lg:text-white"
                   >
-                     <NavLink to="/servizi" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+                     <NavLink prefetch="intent" to="/servizi" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
                         Servizi
                      </NavLink>
                </Typography>
@@ -154,7 +155,7 @@ export default function MyMenu() {
                      <MenuHandler>
                         <Typography variant="h6" 
                         className="p-1 font-normal text-black lg:text-white">
-                           <NavLink to="/risorse" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+                           <NavLink prefetch="intent" to="/risorse" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
                               Risorse
                            </NavLink>
                         </Typography>
@@ -180,7 +181,7 @@ export default function MyMenu() {
                   variant="h6"
                   className="p-1 font-normal text-black lg:text-white"
                   >
-                  <NavLink to="/donazioni" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+                  <NavLink prefetch="intent" to="/donazioni" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
                      Donazioni
                   </NavLink>
                </Typography>
@@ -189,7 +190,7 @@ export default function MyMenu() {
                   variant="h6"
                   className="p-1 font-normal text-black lg:text-white"
                   >
-                  <NavLink to="/contatti" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+                  <NavLink prefetch="intent" to="/contatti" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
                      Contatti
                   </NavLink>
                </Typography>
@@ -198,7 +199,7 @@ export default function MyMenu() {
                   variant="h6"
                   className="p-1 font-normal text-black lg:text-white"
                   >
-                  <NavLink to="/disclaimer" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+                  <NavLink prefetch="intent" to="/disclaimer" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
                      Disclaimer
                   </NavLink>
                </Typography>
