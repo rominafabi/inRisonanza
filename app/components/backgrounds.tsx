@@ -20,12 +20,19 @@ export function SimpleBackground (data : any) {
    )
 }
 
+export function MyBg(data : any) {
+   return (
+      <div className={`absolute w-full h-full z-0 bg-fixed bg-cover bg-center bg-no-repeat bg-[url('/images/${data.bg}.jpeg')] brightness-50`}>
+      </div>
+   )
+}
+
 export function AnimatedBackground (data: any) {
    const title : string = data.title;
    const letters : [] = data.array;
 
    return (
-      <section className="min-h-screen max-h-screen min-w-screen relative">
+      <section className="min-h-screen max-h-screen min-w-screen relative bg-black">
          <div className="absolute z-10 w-full h-full flex flex-col">
             <MyMenu />
             <div className="w-full h-full flex flex-col items-center justify-center">
@@ -44,10 +51,9 @@ export function AnimatedBackground (data: any) {
                </Typography>
             </div>
          </div>
-         <div className={`absolute w-full h-full z-0 bg-fixed bg-cover bg-center bg-no-repeat bg-${title}-background brightness-50`}>
-         </div>
+         <MyBg bg={title} />
       </section>
    )
 } 
 
-export default { SimpleBackground  }
+export default { SimpleBackground, AnimatedBackground, MyBg  }

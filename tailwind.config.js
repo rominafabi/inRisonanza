@@ -7,7 +7,7 @@ module.exports = withMT({
     extend: {
       backgroundImage: {
         'main-background': "url('../../public/images/background.jpeg')",
-        'identita-background' : "url('../../public/images/background-identita.jpeg')",
+        'identita-background' : "url('../../public/images/identita.jpeg')",
         'servizi-background' : "url('../../public/images/servizi.jpeg')",
         'risorse-background' : "url('../../public/images/risorse.jpeg')",
         'donazioni-background' : "url('../../public/images/donazioni.jpeg')",
