@@ -4,13 +4,14 @@ import { useOptionalUser } from "~/utils";
 import MyMenu from "./menu";
 import Typewriter from "typewriter-effect"
 import { NavButton } from "~/components/buttons";
+import { SectionIdentita } from "~/components/home/identitaSection";
 
 
 export default function Index() {
   const user = useOptionalUser();
   return (
-    <main className="min-h-screen min-w-screen">
-      <section className="min-h-screen max-h-screen min-w-screen relative">
+    <main className="min-h-screen min-w-screen bg-gray-900">
+      <section className="min-h-screen max-h-screen min-w-screen relative bg-gray-900">
         <div className="absolute z-10 w-full h-full flex flex-col">
           <MyMenu />
           <div className="w-full h-full flex flex-col items-center justify-center">
@@ -55,7 +56,7 @@ export default function Index() {
         <div className="absolute w-full h-full z-0 bg-fixed bg-cover bg-center bg-no-repeat bg-main-background brightness-50">
         </div>
       </section>
-      <section className="bg-white min-h-screen max-h-screen min-w-screen flex justify-center flex-col">
+{/*       <section className="bg-white min-h-screen max-h-screen min-w-screen flex justify-center flex-col">
         <div className="flex justify-center pt-4">
           <Typography variant="h2" className="lg:text-5xl">
             Identità
@@ -75,7 +76,8 @@ export default function Index() {
             <NavButton route="/identita" text="Scopri di più"/>
           </div>
         </div>
-      </section>
+      </section> */}
+      <SectionIdentita />
     </main>
   );
 }
