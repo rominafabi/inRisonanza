@@ -9,22 +9,25 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import { getUser } from "./session.server";
+import { getOperatore, getUser } from "./session.server";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
+import globals from "./styles/globals.css";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [{ rel: "stylesheet", href: tailwindStylesheetUrl },{rel: "stylesheet" , href: globals}];
 };
+
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Romina Fabi",
+  title: "in Risonanza",
   viewport: "width=device-width,initial-scale=1",
 });
 
 export async function loader({ request }: LoaderArgs) {
   return json({
     user: await getUser(request),
+    operatore: await getOperatore(request),
   });
 }
 
@@ -35,7 +38,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="h-full bg-main">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

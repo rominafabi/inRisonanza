@@ -1,3 +1,10 @@
+// Commands to know:
+// `npx prisma generate` - update TypeScript definitions based on this schema
+// `npx prisma db push` - push the schema changes to the database
+// `npx prisma studio` - open the Studio, which allows you to edit the schema.
+// `npx prisma migrate reset` - reset the migrations to the last version. This will reset the DB and run the seed script
+// `npx prisma migrate dev --name <descriptive-name>` - generate a migration file for any changes you make to the schema (this will be committed).
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -5,11 +12,30 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["orderByNulls"]
+}
+
+enum Role {
+  UTENTE
+  PENDING
+  OPERATORE
+  ADMIN
+}
+
+enum SocialDen {
+  FACEBOOK
+  INSTAGRAM
+  TWITTER
+  YOUTUBE
+  LINKEDIN
+  TELEGRAM
+  PERSONALE
 }
 
 model User {
   id    String @id @default(cuid())
   email String @unique
+  role  Role   @default(UTENTE)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -19,10 +45,53 @@ model User {
 }
 
 model Password {
-  hash String
-
+  hash   String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
+}
+
+model Operatore {
+  id                String             @id @default(cuid())
+  email             String             @unique
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  role              Role               @default(UTENTE)
+  comune            Comune             @relation(fields: [comuneId], references: [id])
+  comuneId          Int                
+  passwordOperatore PasswordOperatore?
+  categorie         Categoria[]
+  socials           SocialLink[]
+}
+
+model Comune {
+  id            Int         @id @default(autoincrement())
+  nome          String
+  codiceProvCom String
+  nomeProv      String
+  sigla         String
+  nomeReg       String
+  codReg        String
+  operatori     Operatore[]
+}
+
+model PasswordOperatore {
+  hash        String
+  operatore   Operatore @relation(fields: [operatoreId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  operatoreId String    @unique
+}
+
+model Categoria {
+  id        Int         @id @default(autoincrement())
+  Nome      String
+  operatori Operatore[]
+}
+
+model SocialLink {
+  id          Int       @id @default(autoincrement())
+  operatore   Operatore @relation(fields: [operatoreId], references: [id])
+  operatoreId String
+  denominazione  SocialDen
+  link        String
 }
 
 model Note {

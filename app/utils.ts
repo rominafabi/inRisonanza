@@ -2,6 +2,8 @@ import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 
 import type { User } from "~/models/user.server";
+import type { Operatore } from "~/models/operatore.server";
+import { prisma } from "./db.server";
 
 const DEFAULT_REDIRECT = "/";
 
@@ -33,6 +35,7 @@ export function safeRedirect(
  * @param {string} id The route id
  * @returns {JSON|undefined} The router data or undefined if not found
  */
+
 export function useMatchesData(
   id: string
 ): Record<string, unknown> | undefined {
@@ -44,8 +47,14 @@ export function useMatchesData(
   return route?.data;
 }
 
+
+
 function isUser(user: any): user is User {
   return user && typeof user === "object" && typeof user.email === "string";
+}
+
+function isOperatore(operatore: any): operatore is Operatore {
+  return operatore && typeof operatore === "object" && typeof operatore.email === "string";
 }
 
 export function useOptionalUser(): User | undefined {
@@ -54,6 +63,23 @@ export function useOptionalUser(): User | undefined {
     return undefined;
   }
   return data.user;
+}
+
+export function useOptionalOperatore(): Operatore | undefined {
+  const data = useMatchesData("root");
+  if (!data || !isOperatore(data.operatore)) {
+    return undefined;
+  }
+  return data.operatore;
+}
+
+export function useOptionalComune(nomeProv: string) {
+  return prisma.comune.findMany({
+    where: {
+       nomeProv: nomeProv,
+    },
+    select: {id: true, nome: true, sigla: true},
+ })
 }
 
 export function useUser(): User {
@@ -65,7 +91,7 @@ export function useUser(): User {
   }
   return maybeUser;
 }
-
+// DA MODIFICARE LA VERIFICA DEL PROVIDER MAIL
 export function validateEmail(email: unknown): email is string {
-  return typeof email === "string" && email.length > 3 && email.includes("@");
+  return typeof email === "string" && email.length > 3 && email.includes("@") && email.endsWith("gmail.com");
 }

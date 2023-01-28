@@ -1,10 +1,20 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import comuni from "./comuni.json";
 
 const prisma = new PrismaClient();
 
+
 async function seed() {
   const email = "rachel@remix.run";
+  const data = Array.from(comuni).map(data => ({
+    nome : data.comune || "",
+    nomeProv: data.den_prov || "",
+    sigla: data.sigla || "",
+    nomeReg: data.den_reg || "",
+    codReg: data.cod_reg || "",
+    codiceProvCom: data.pro_com_t || "",
+  }));
 
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
@@ -23,6 +33,31 @@ async function seed() {
       },
     },
   });
+
+    await prisma.comune.createMany({
+      data
+    });
+
+    await prisma.operatore.create({
+      data: {
+        email : "ginopaoli@gmail.com",
+        comune : {
+          connect : { id : 1},
+        },
+        socials: {
+          create: {
+            denominazione: "FACEBOOK",
+            link: "https://www.facebook.com",
+          }
+        },
+        passwordOperatore: {
+          create: {
+            hash: hashedPassword,
+          }
+        }
+      }
+    })
+
 
   await prisma.note.create({
     data: {

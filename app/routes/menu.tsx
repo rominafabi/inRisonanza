@@ -1,55 +1,123 @@
 import { useEffect, useState } from "react";
 import {
-   Navbar,
-   MobileNav,
-   Typography,
-   Button,
-   IconButton,
-   Menu,
-   MenuHandler,
-   MenuList,
-   MenuItem,
- } from "@material-tailwind/react";
-import { NavLink } from "@remix-run/react";
+  Navbar,
+  MobileNav,
+  Typography,
+  Button,
+  IconButton,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+} from "@material-tailwind/react";
+import { Form, NavLink } from "@remix-run/react";
+import { useOptionalOperatore, useOptionalUser } from "~/utils";
 
-export default function MyMenu() {
-   const [openNav, setOpenNav] = useState(false);
-   const [isOpen, setIsOpen] = useState(false);
 
-   const showMenu = () => {
+export default function MyMenu(data: any) {
+  const operator = useOptionalOperatore();
+  const user = useOptionalUser();
+
+  const [openNav, setOpenNav] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [colorDropDown, setColorDropDown] = useState("white");
+  const [colorDropDown2, setColorDropDown2] = useState("white");
+  const [classDropDown, selectClassDropDown] = useState("rotate-[-90deg]");
+  const [classDropDown2, selectClassDropDown2] = useState("rotate-[-90deg]");
+  const [hoveringStat, setHoveringStat] = useState(false);
+  const [hoveringStat2, setHoveringStat2] = useState(false);
+  const active: string =
+    "flex items-center text-hearth bg-white py-2 px-6 rounded group [&>*]:fill-hearth font-semiBold";
+  const notActive: string =
+    "flex items-center hover:text-hearth hover:bg-white py-2 px-6 rounded group font-semiBold";
+  const activeSubClass: string = "hover:bg-[#02c3a5] hover:text-white";
+
+  const showMenu = () => {
     setIsOpen(true);
-   }
-   
-   const showOff = () => {
-      setIsOpen(false)
-   }
-   
-   useEffect(() => {
-     window.addEventListener(
-       "resize",
-       () => window.innerWidth >= 960 && setOpenNav(false)
-     );
-   }, []);
-  
-   const navList = (
-      <ul className="mb-4 mt-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-        <Typography
-          as="li"
-          variant="h6"
+    setHoveringStat(true);
+    setColorDropDown2("#627282");
+    selectClassDropDown2("");
+  };
 
-          className="p-1 font-normal text-black lg:text-white"
-        >
-          <NavLink to="/" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")} end>
-            Home
-          </NavLink>
-        </Typography>
-        <Typography
+  const showOff = () => {
+    setIsOpen(false);
+    setHoveringStat(false);
+    setColorDropDown2("white");
+    selectClassDropDown2("rotate-[-90deg]");
+  };
+
+  const showMenu2 = () => {
+    setIsOpen2(true);
+    setHoveringStat2(true);
+    setColorDropDown("#627282");
+    selectClassDropDown("");
+  };
+
+  const showOff2 = () => {
+    setIsOpen2(false);
+    setHoveringStat2(false);
+    setColorDropDown("white");
+    selectClassDropDown("rotate-[-90deg]");
+  };
+
+  useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpenNav(false)
+    );
+  }, []);
+
+  const city = [
+    {
+      Id: 1,
+      Nome: "Roma",
+      Link: "/operatori-per-citta/Roma"
+    },
+    {
+      Id: 2,
+      Nome: "Milano",
+      Link: "/operatori-per-citta/Milano"
+    },
+    {
+      Id: 3,
+      Nome: "Torino",
+      Link: "/operatori-per-citta/Torino"
+    },
+    {
+      Id: 4,
+      Nome: "Napoli",
+      Link: "/operatori-per-citta/Napoli"
+    },
+    {
+      Id: 5,
+      Nome: "Bologna",
+      Link: "/operatori-per-citta/Bologna"
+    },
+    {
+      Id: 6,
+      Nome: "Firenze",
+      Link: "/operatori-per-citta/Firenze"
+    },
+  ]
+
+  const navList = (
+    <ul className="mb-4 mt-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <Typography
         as="li"
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="/identita" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-          Identità
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center text-[#79b73d]"
+              : "flex items-center hover:text-[#79b73d]"
+          }
+          end
+        >
+          Home
         </NavLink>
       </Typography>
       <Typography
@@ -57,7 +125,14 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="/servizi" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
+        <NavLink
+          to="/servizi"
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center text-[#79b73d]"
+              : "flex items-center hover:text-[#79b73d]"
+          }
+        >
           Servizi
         </NavLink>
       </Typography>
@@ -66,145 +141,199 @@ export default function MyMenu() {
         variant="h6"
         className="p-1 font-normal text-black lg:text-white"
       >
-        <NavLink to="/risorse" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-          Risorse
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="h6"
-        className="p-1 font-normal text-black lg:text-white"
-      >
-        <NavLink to="/donazioni" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-            Donazioni 
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="h6"
-        className="p-1 font-normal text-black lg:text-white"
-      >
-        <NavLink to="/contatti" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-            Contatti
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="h6"
-        className="p-1 font-normal text-black lg:text-white"
-      >
-        <NavLink to="/disclaimer" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-            Disclaimer
+        <NavLink
+          to="/citta"
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center text-[#79b73d]"
+              : "flex items-center hover:text-[#79b73d]"
+          }
+        >
+          Città
         </NavLink>
       </Typography>
     </ul>
   );
 
-   return (
-      <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:pt-4 lg:bg-transparent lg:border-none" blurred={false} shadow={false}>
-         <NavLink
+  return (
+    <Navbar
+      className="w-full max-w-full rounded-none bg-[#02C3A5] py-2 px-4 lg:border-none lg:py-0"
+      blurred={false}
+      shadow={false}
+    >
+      {/* NAVIGAZIONE DESKTOP */}
+      <div className="container mx-auto flex items-center text-blue-gray-900">
+
+        <NavLink
           prefetch="intent"
           to="/"
-          className="hidden lg:block cursor-pointer py-1.5 font-normal"
-         >
-            <img src="/images/logo.png" alt="avatar" className="h-20 w-20 mx-auto"/>
-         </NavLink>
-      <div className="container mx-auto flex items-center justify-center text-blue-gray-900">
-         <div className="hidden lg:block">
-            <ul className="mb-4 mt-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-               <Typography
-                  as="li"
-                  variant="h6"
-                  className="p-1 font-normal text-black lg:text-white"
-                  >
-                     <NavLink prefetch="intent" to="/" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-                        Home
-                     </NavLink>
-               </Typography>
-               <Typography
-                  as="li"
-                  variant="h6"
-                  className="p-1 font-normal text-black lg:text-white"
-                  >
-                     <NavLink prefetch="intent" to="/identita" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-                        Identità
-                     </NavLink>
-               </Typography>
-               <Typography
-                  as="li"
-                  variant="h6"
-                  className="p-1 font-normal text-black lg:text-white"
-                  >
-                     <NavLink prefetch="intent" to="/servizi" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-                        Servizi
-                     </NavLink>
-               </Typography>
+          className="mx-4 hidden cursor-pointer font-normal lg:block"
+        >
+          <img
+            src="/images/logo/inrisonanza.png"
+            alt="avatar"
+            className="mx-auto h-20 w-auto"
+          />
+        </NavLink>
 
-               <Typography
-               as="li"
-               onMouseEnter={showMenu}
-               onMouseLeave={showOff}
-               >  
-                  <Menu
-                  open={isOpen}
-                  animate={{
+        <div className="hidden lg:flex grow">
+          <ul className="my-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-2">
+
+            {/* HOME */}
+            <Typography
+              as="li"
+              variant="h6"
+              className="p-1 font-normal text-black lg:text-white"
+            >
+              <NavLink
+                prefetch="intent"
+                to="/"
+                className={({ isActive }) => (isActive ? active : notActive)}
+              >
+                Home
+              </NavLink>
+            </Typography>
+            {/* SERVIZI */}
+            <Typography as="li" onMouseEnter={showMenu} onMouseLeave={showOff}>
+              <Menu
+                open={isOpen}
+                animate={{
                   mount: { y: 0 },
                   unmount: { y: 25 },
-                  }}
+                }}
+              >
+                <MenuHandler>
+                  <Typography
+                    variant="h6"
+                    className="p-1 font-normal text-black lg:text-white"
                   >
-                     <MenuHandler>
-                        <Typography variant="h6" 
-                        className="p-1 font-normal text-black lg:text-white">
-                           <NavLink prefetch="intent" to="/risorse" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-                              Risorse
-                           </NavLink>
-                        </Typography>
-                     </MenuHandler>
-                     <MenuList>
-                        <Menu placement="right-start" offset={15}>
-                           <MenuHandler>
-                              <MenuItem className="hover:bg-[#79b73d]">Mazzi</MenuItem>
-                           </MenuHandler>
-                           <MenuList>
-                              <MenuItem className="hover:bg-[#79b73d]">Oracoli</MenuItem>
-                              <MenuItem className="hover:bg-[#79b73d]">Tarocchi</MenuItem>
-                           </MenuList>
-                        </Menu>
-                        <MenuItem className="hover:bg-[#79b73d]">Circuiti Radionici</MenuItem>
-                        <MenuItem className="hover:bg-[#79b73d]">Quadranti Radiestesici</MenuItem>
-                        <MenuItem className="hover:bg-[#79b73d]">Stese</MenuItem>
-                     </MenuList>
-                  </Menu>
-               </Typography>
-               <Typography
-                  as="li"
-                  variant="h6"
-                  className="p-1 font-normal text-black lg:text-white"
-                  >
-                  <NavLink prefetch="intent" to="/donazioni" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-                     Donazioni
+                    <NavLink
+                      prefetch="intent"
+                      to="/Servizi"
+                      className={({ isActive }) =>
+                        isActive || hoveringStat ? active : notActive
+                      }
+                    >
+                      Servizi
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="20"
+                        width="20"
+                        fill={colorDropDown2}
+                        className={classDropDown2}
+                      >
+                        <path d="M10 12 6 8h8Z" />
+                      </svg>
+                    </NavLink>
+                  </Typography>
+                </MenuHandler>
+                <MenuList>
+                  {/*                   <Menu placement="right-start" offset={15}>
+                    <MenuHandler>
+                      <MenuItem className={activeSubClass}>Mazzi</MenuItem>
+                    </MenuHandler>
+                    <MenuList>
+                      <MenuItem className={activeSubClass}>Oracoli</MenuItem>
+                      <MenuItem className={activeSubClass}>Tarocchi</MenuItem>
+                    </MenuList>
+                  </Menu> */}
+                  <NavLink to="/operatori/Reiki" className="outline-transparent">
+                    <MenuItem className={activeSubClass}>Reiki</MenuItem>
                   </NavLink>
-               </Typography>
-               <Typography
-                  as="li"
-                  variant="h6"
-                  className="p-1 font-normal text-black lg:text-white"
-                  >
-                  <NavLink prefetch="intent" to="/contatti" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-                     Contatti
+                  <NavLink to="/operatori/Tarologia" className="outline-transparent">
+                    <MenuItem className={activeSubClass}>Tarologia</MenuItem>
                   </NavLink>
-               </Typography>
-               <Typography
-                  as="li"
-                  variant="h6"
-                  className="p-1 font-normal text-black lg:text-white"
-                  >
-                  <NavLink prefetch="intent" to="/disclaimer" className={({ isActive }) => (isActive ? "flex items-center text-[#79b73d]" : "flex items-center hover:text-[#79b73d]")}>
-                     Disclaimer
+                  <NavLink to="/operatori/Cartomanzia" className="outline-transparent">
+                    <MenuItem className={activeSubClass}>Cartomanzia</MenuItem>
                   </NavLink>
-               </Typography>
-            </ul>
-         </div>
+                </MenuList>
+              </Menu>
+            </Typography>
+            {/* CITTA / PROVINCE */}
+            <Typography
+              as="li"
+              onMouseEnter={showMenu2}
+              onMouseLeave={showOff2}
+            >
+              <Menu
+                open={isOpen2}
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 25 },
+                }}
+              >
+                <MenuHandler>
+                  <Typography
+                    variant="h6"
+                    className="p-1 font-normal text-black lg:text-white"
+                  >
+                    <NavLink
+                      prefetch="intent"
+                      to="/province"
+                      className={({ isActive }) =>
+                        isActive || hoveringStat2 ? (active) : (notActive)
+                      }
+                    >
+                      Città
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="20"
+                        width="20"
+                        fill={colorDropDown}
+                        className={classDropDown}
+                      >
+                        <path d="M10 12 6 8h8Z" />
+                      </svg>
+                    </NavLink>
+                  </Typography>
+                </MenuHandler>
+                <MenuList>
+                  {
+                    city.map((citta) => (
+                  <NavLink to={citta.Link} className="outline-transparent" key={citta.Id}>
+                    <MenuItem className={activeSubClass}>
+                      {citta.Nome}
+                    </MenuItem>
+                  </NavLink>
+                    ))
+                  }
+                  <NavLink to="/province" className="outline-transparent">
+                    <MenuItem className={activeSubClass}>
+                      Vedi Tutte...
+                    </MenuItem>
+                  </NavLink>
+                </MenuList>
+              </Menu>
+            </Typography>
+
+          </ul>
+          
+        </div>
+        {/* CONTENITORE LOGIN USER / OPERATORE*/}
+        {operator && (
+          <Form action="/logout" method="post">
+            <button type="submit" className="rounded bg-white py-2 px-6 text-main hover:text-hearth active:bg-white">
+              Logout
+            </button>
+          </Form>
+          )}
+        {!operator && !user && (
+          <div className="flex gap-2">
+          <NavLink to="/login/operatore" className="rounded bg-white py-2 px-6 text-main hover:text-hearth">
+            Sei un Operatore?
+          </NavLink>
+          <NavLink to="/login" className="rounded bg-white py-2 px-6 text-main hover:text-hearth">
+            Accedi
+          </NavLink>
+          </div>
+        )}
+        {user && (
+          <Form action="/logout" method="post">
+          <button type="submit" className="rounded bg-white py-2 px-6 text-main hover:text-hearth active:bg-white">
+            Logout
+          </button>
+        </Form>
+        )}
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -214,10 +343,10 @@ export default function MyMenu() {
           {openNav ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
+              fill="white"
               className="h-6 w-6"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke="white"
               strokeWidth={2}
             >
               <path
@@ -230,8 +359,8 @@ export default function MyMenu() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
+              fill="white"
+              stroke="white"
               strokeWidth={2}
             >
               <path
@@ -242,7 +371,9 @@ export default function MyMenu() {
             </svg>
           )}
         </IconButton>
+
       </div>
+      {/* NAVIGAZIONE MOBILE */}
       <MobileNav open={openNav}>
         {navList}
         <Button variant="gradient" size="sm" fullWidth className="mb-2">
@@ -250,5 +381,5 @@ export default function MyMenu() {
         </Button>
       </MobileNav>
     </Navbar>
-   )
+  );
 }
