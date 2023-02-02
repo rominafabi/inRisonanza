@@ -93,5 +93,5 @@ export function useUser(): User {
 }
 // DA MODIFICARE LA VERIFICA DEL PROVIDER MAIL
 export function validateEmail(email: unknown): email is string {
-  return typeof email === "string" && email.length > 3 && email.includes("@") && email.endsWith("gmail.com");
+  return typeof email === "string" && email.length > 3 && email.includes("@");
 }

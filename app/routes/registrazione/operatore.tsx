@@ -9,6 +9,7 @@ import { createOperatore, getOperatoreByEmail } from "~/models/operatore.server"
 import { safeRedirect, validateEmail } from "~/utils";
 import type { Comune, Role } from "@prisma/client";
 import { getComuniList } from "~/models/comuni.server";
+import { faker } from "@faker-js/faker";
 
 export async function loader() {
   const comuni = await getComuniList();
@@ -21,6 +22,7 @@ export async function action({ request }: ActionArgs) {
   const password = formData.get("password");
   const role = formData.get("role");
   const comune = formData.get("comune");
+  const telefono = faker.phone.number();
   const userIs : Role = "PENDING";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
   console.log("comune tipo:", typeof comune?.toString())
@@ -69,7 +71,7 @@ export async function action({ request }: ActionArgs) {
 
   console.log("role is:", typeof role);
 
-  const operatore = await createOperatore(email, password, userIs, comune?.toString());
+  const operatore = await createOperatore(email, password, userIs, comune?.toString(), telefono);
 
   return createOperatoreSession({
     request,
