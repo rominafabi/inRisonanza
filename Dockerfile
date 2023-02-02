@@ -32,7 +32,9 @@ WORKDIR /myapp
 COPY --from=deps /myapp/node_modules /myapp/node_modules
 
 ADD prisma .
+ADD prisma/seed .
 RUN npx prisma generate
+RUN npx ts-node ./prisma/seed
 
 ADD . .
 RUN npm run build
