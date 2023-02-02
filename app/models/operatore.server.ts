@@ -13,13 +13,14 @@ export async function getOperatoreByEmail(email: Operatore["email"]) {
   return prisma.operatore.findUnique({ where: { email } });
 }
 
-export async function createOperatore(email: Operatore["email"], password: string , role : Role, comune: Comune["id"]) {
+export async function createOperatore(email: Operatore["email"], password: string , role : Role, comune: Comune["id"], cellulare: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   return prisma.operatore.create({
     data: {
       email,
       role,
+      cellulare,
       comuneId: comune,
       passwordOperatore: {
         create: {
