@@ -1,4 +1,4 @@
-import type { Role, Operatore, PasswordOperatore } from "@prisma/client";
+import type { Role, Operatore, PasswordOperatore, Comune } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
@@ -13,7 +13,7 @@ export async function getOperatoreByEmail(email: Operatore["email"]) {
   return prisma.operatore.findUnique({ where: { email } });
 }
 
-export async function createOperatore(email: Operatore["email"], password: string , role : Role, comune: Operatore["comuneId"]) {
+export async function createOperatore(email: Operatore["email"], password: string , role : Role, comune: Comune["id"]) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   return prisma.operatore.create({

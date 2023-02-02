@@ -1,14 +1,22 @@
-import { Typography } from "@material-tailwind/react"
 import { NavLink } from "@remix-run/react"
 
 export function NavButton(data : any) {
    const route = data.route
    const buttonText = data.text
    return (
-      <NavLink to={route} className="py-3 px-20 bg-black rounded-xl text-white border-2 border-black hover:bg-white hover:text-black transition duration-300">
-         <Typography>{buttonText}</Typography>
+      <NavLink to={route} className="duration-300 w-full md:w-min text-center uppercase px-6 py-2 border-2 border-main bg-main font-openSans text-white text-md rounded hover:bg-white hover:text-main">
+         {buttonText}
       </NavLink>
    )
 }
 
-export default { NavButton }
+export function SubmitButton(data: any) {
+   const buttonText = data.text
+   return (
+      <button type="submit" className="duration-300 flex-1 px-6 py-2 border-2 border-main bg-main text-semiBold text-white text-md rounded hover:bg-white hover:text-main">
+         {buttonText}
+      </button>
+   )
+}
+
+export default { NavButton, SubmitButton }

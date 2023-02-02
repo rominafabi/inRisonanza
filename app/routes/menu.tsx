@@ -28,9 +28,9 @@ export default function MyMenu(data: any) {
   const [hoveringStat, setHoveringStat] = useState(false);
   const [hoveringStat2, setHoveringStat2] = useState(false);
   const active: string =
-    "flex items-center text-hearth bg-white py-2 px-6 rounded group [&>*]:fill-hearth font-semiBold";
+    "flex items-center text-main bg-white py-2 px-6 rounded group [&>*]:fill-main font-semiBold";
   const notActive: string =
-    "flex items-center hover:text-hearth hover:bg-white py-2 px-6 rounded group font-semiBold";
+    "flex items-center hover:text-main hover:bg-white py-2 px-6 rounded group font-semiBold";
   const activeSubClass: string = "hover:bg-[#02c3a5] hover:text-white";
 
   const showMenu = () => {
@@ -72,33 +72,48 @@ export default function MyMenu(data: any) {
     {
       Id: 1,
       Nome: "Roma",
-      Link: "/operatori-per-citta/Roma"
+      Link: "/province/rm"
     },
     {
       Id: 2,
       Nome: "Milano",
-      Link: "/operatori-per-citta/Milano"
+      Link: "/province/mi"
     },
     {
       Id: 3,
       Nome: "Torino",
-      Link: "/operatori-per-citta/Torino"
+      Link: "/province/to"
     },
     {
       Id: 4,
       Nome: "Napoli",
-      Link: "/operatori-per-citta/Napoli"
+      Link: "/province/na"
     },
     {
       Id: 5,
       Nome: "Bologna",
-      Link: "/operatori-per-citta/Bologna"
+      Link: "/province/bo"
     },
     {
       Id: 6,
       Nome: "Firenze",
-      Link: "/operatori-per-citta/Firenze"
+      Link: "/province/fi"
     },
+    {
+      Id: 7,
+      Nome: "Venezia",
+      Link: "/province/ve"
+    },
+    {
+      Id: 8,
+      Nome: "Genova",
+      Link: "/province/ge"
+    },
+    {
+      Id: 9,
+      Nome: "L'Aquila",
+      Link: "/province/aq"
+    }
   ]
 
   const navList = (

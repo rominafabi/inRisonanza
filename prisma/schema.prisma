@@ -11,7 +11,7 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["orderByNulls"]
 }
 
@@ -53,25 +53,57 @@ model Password {
 model Operatore {
   id                String             @id @default(cuid())
   email             String             @unique
+  cellulare         String             @unique
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   role              Role               @default(UTENTE)
   comune            Comune             @relation(fields: [comuneId], references: [id])
-  comuneId          Int                
+  comuneId          String
   passwordOperatore PasswordOperatore?
-  categorie         Categoria[]
-  socials           SocialLink[]
+  servizi           ServiziOperatore[]
+  pagina            Pagina?
+}
+
+model Pagina {
+  id          String       @id @default(cuid())
+  operatore   Operatore    @relation(fields: [operatoreId], references: [id])
+  operatoreId String       @unique
+  profilePic  String       @default("/images/logo/defaultProfilePic.png")
+  nome        String       @default("")
+  cognome     String       @default("")
+  titolo      String       @default("")
+  biografia   String       @default("")
+  socials     SocialLink[]
+}
+
+model Servizio {
+  id            Int                @id @default(autoincrement())
+  denominazione String
+  operatori     ServiziOperatore[]
+}
+
+model ServiziOperatore {
+  operatore   Operatore @relation(fields: [operatoreId], references: [id])
+  operatoreId String
+  servizio    Servizio  @relation(fields: [servizioId], references: [id])
+  servizioId  Int
+  assignedAt  DateTime  @default(now())
+  comune      Comune    @relation(fields: [comuneId], references: [id])
+  comuneId    String
+  prezzo Int @default(50)
+
+  @@id([operatoreId, servizioId])
 }
 
 model Comune {
-  id            Int         @id @default(autoincrement())
-  nome          String
-  codiceProvCom String
-  nomeProv      String
-  sigla         String
-  nomeReg       String
-  codReg        String
-  operatori     Operatore[]
+  id        String             @id
+  nome      String
+  nomeProv  String
+  sigla     String
+  nomeReg   String
+  codReg    String
+  operatori Operatore[]
+  servizi   ServiziOperatore[]
 }
 
 model PasswordOperatore {
@@ -80,18 +112,12 @@ model PasswordOperatore {
   operatoreId String    @unique
 }
 
-model Categoria {
-  id        Int         @id @default(autoincrement())
-  Nome      String
-  operatori Operatore[]
-}
-
 model SocialLink {
-  id          Int       @id @default(autoincrement())
-  operatore   Operatore @relation(fields: [operatoreId], references: [id])
-  operatoreId String
-  denominazione  SocialDen
-  link        String
+  id            Int       @id @default(autoincrement())
+  pagina        Pagina    @relation(fields: [paginaId], references: [id])
+  paginaId      String
+  denominazione SocialDen
+  link          String
 }
 
 model Note {

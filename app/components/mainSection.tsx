@@ -1,12 +1,10 @@
-import MyMenu from "~/routes/menu";
 import Typewriter from "typewriter-effect"
 
 export default function MainSection(data:any) {
    
    return (
-      <section className="min-h-screen max-h-screen min-w-screen relative">
+      <section className="lg:h-[calc(100vh-80px)] h-[calc(100vh-56px)] min-w-screen relative">
       <div className="absolute z-10 w-full h-full flex flex-col">
-         <MyMenu />
          <div className="w-full h-full flex flex-col items-center justify-center py-4">
             {/* TITOLO PAGINA */}
             <h1 className="lg:text-6xl text-2xl text-white font-semiBold uppercase">

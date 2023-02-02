@@ -1,3 +1,5 @@
+import { Link } from "@remix-run/react";
+
 interface Provincia {
    nomeProv: string;
    sigla: string;
@@ -5,14 +7,15 @@ interface Provincia {
 
 export default function ProvinciaList(data: any) {
    const province : Provincia[] = data.province;
-   const containerClass = "w-full h-full bg-[#d8ebe8] p-4 rounded-xl flex flex-col flex-wrap items-start items-stretch";
+   const containerClass = "w-full h-full bg-secondary p-4 rounded-xl flex flex-col flex-wrap items-start items-stretch";
    const secondContainerClass = "w-full h-min shrink flex-auto";
    const letterClass = "text-white text-lg bg-main rounded px-2 my-2 font-semiBold";
-   const provinciaClass = "px-6 text-[#1a2734] font-openSans";
+   const provinciaClass = "px-6 text-paragraph font-openSans hover:text-red-500";
 
    const filterProvincesByLetter = (provinces: Provincia[], letter: string) => {
       return provinces.filter(province => province.nomeProv.startsWith(letter));
     }
+
 
    return (
       <section className="h-full w-screen max-w-screen relative bg-white p-4 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -22,7 +25,9 @@ export default function ProvinciaList(data: any) {
             <h5 className={letterClass}>{letter}</h5>
             <ul>
             {filterProvincesByLetter(province, letter).map(provincia => (
-               <li key={provincia.sigla} className={provinciaClass}>{provincia.nomeProv}</li>
+               <Link to={`/province/${provincia.sigla.toLowerCase()}`} key={provincia.sigla} >
+                  <li className={provinciaClass}>{provincia.nomeProv}</li>
+               </Link>
             ))}
             </ul>
          </div>
@@ -34,7 +39,9 @@ export default function ProvinciaList(data: any) {
             <h5 className={letterClass}>{letter}</h5>
             <ul>
             {filterProvincesByLetter(province, letter).map(provincia => (
-               <li key={provincia.sigla} className={provinciaClass}>{provincia.nomeProv}</li>
+               <Link to={`/province/${provincia.sigla.toLowerCase()}`} key={provincia.sigla} >
+                  <li className={provinciaClass}>{provincia.nomeProv}</li>
+               </Link>
             ))}
             </ul>
          </div>
@@ -46,7 +53,9 @@ export default function ProvinciaList(data: any) {
             <h5 className={letterClass}>{letter}</h5>
             <ul>
             {filterProvincesByLetter(province, letter).map(provincia => (
-               <li key={provincia.sigla} className={provinciaClass}>{provincia.nomeProv}</li>
+               <Link to={`/province/${provincia.sigla.toLowerCase()}`} key={provincia.sigla} className="group">
+                  <li className={provinciaClass}>{provincia.nomeProv}</li>
+               </Link>
             ))}
             </ul>
          </div>
@@ -58,7 +67,9 @@ export default function ProvinciaList(data: any) {
             <h5 className={letterClass}>{letter}</h5>
             <ul>
             {filterProvincesByLetter(province, letter).map(provincia => (
-               <li key={provincia.sigla} className={provinciaClass}>{provincia.nomeProv}</li>
+               <Link to={`/province/${provincia.sigla.toLowerCase()}`} key={provincia.sigla} >
+                  <li className={provinciaClass}>{provincia.nomeProv}</li>
+               </Link>
             ))}
             </ul>
          </div>

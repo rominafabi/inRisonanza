@@ -13,6 +13,11 @@
 }
 
 @font-face {
+  font-family: "openSansBold";
+  src: url("/fonts/OpenSans-Bold.woff2") format('woff2');
+}
+
+@font-face {
   font-family: "uniNeueLight";
   src: url("/fonts/UniNeue-Light.woff2") format('woff2');
 }

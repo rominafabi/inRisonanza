@@ -7,6 +7,7 @@ module.exports = withMT({
     fontFamily: {
       openSans: ["openSans", "sans-serif"],
       semiBold: ["semiBold", "sans-serif"],
+      openSansBold: ["openSansBold", "sans-serif"],
       uniNeueLight: ["uniNeueLight", "sans-serif"],
       uniNeueBook: ["uniNeueBook", "sans-serif"],
       uniNeueRegular: ["uniNeueRegular", "sans-serif"],
@@ -14,7 +15,9 @@ module.exports = withMT({
     },
     colors: {
       main: "#02C3A5",
+      secondary: "#d8ebe8",
       hearth: "#ED5C5C",
+      paragraph: "#1a2734",
     },
     extend: {
       backgroundImage: {

@@ -20,10 +20,10 @@ export async function action({ request }: ActionArgs) {
   const email = formData.get("email");
   const password = formData.get("password");
   const role = formData.get("role");
-  const comune = Number(formData.get("comune"));
+  const comune = formData.get("comune");
   const userIs : Role = "PENDING";
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
-  console.log(comune)
+  console.log("comune tipo:", typeof comune?.toString())
 
   if (!validateEmail(email)) {
     return json(
@@ -69,7 +69,7 @@ export async function action({ request }: ActionArgs) {
 
   console.log("role is:", typeof role);
 
-  const operatore = await createOperatore(email, password, userIs, comune);
+  const operatore = await createOperatore(email, password, userIs, comune?.toString());
 
   return createOperatoreSession({
     request,
